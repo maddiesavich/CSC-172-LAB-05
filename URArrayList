@@ -2,22 +2,63 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class URArrayList<E> implements URList<E> {
+
+	// Initialize
+	private int length;
+	private int originalSize;
+	private int newSize;
+	private Object[] URArrayL;
+
+	// Constructor
+	URArrayList() {
+		// Size of array is 10
+		URArrayL = new Object[0];
+		length = 0;
+		originalSize = 0;
+	}
+
 	// Increases the capacity of this ArrayList instance, if necessary,
 	// to ensure that it can hold at least the number of elements specified
 	// by the minimum capacity argument.
 	void ensureCapacity(int minCapacity) {
-		
+		// Keep track of the size of the object (cast) which has a minimum of zero
+		URArrayL = new Object[originalSize];
+
 	}
+
 	// Returns the current capacity of the list
-	int getCapacity(Object e) {
+	int getCapacity() {
+		int newSize = URArrayL.length;
+		URArrayL = (E[]) new Object[newSize];
+		// Use method to create a new Array
+		newArrayL(originalSize, newSize);
+		originalSize = newSize;
+		return newSize;
 
-		return 0;
 	}
 
+	// Creating a new ArrayList to match the desired size (newSize) using the
+	// originalSize and overwriting it with the newSize
+	private void newArrayL(int originalSize, int newSize) {
+		// for loop to create the array at the desired size (loop over each value to
+		// create space at each index point)
+		for (int i = 0; i < newSize; i++) {
+			URArrayL[i] = originalSize[i];
+		}
+	}
+
+	// Add an object to the array and increase its size by one
 	@Override
 	public boolean add(Object e) {
-		// TODO Auto-generated method stub
-		return false;
+		// check to see if the size of URArrayL is less than or equal to it's original
+		// size
+		if (originalSize >= URArrayL.length) {
+
+		}
+		// Take the original size of the array and increase its size by one
+		URArrayL[originalSize] = e;
+		originalSize++;
+		return true;
 	}
 
 	@Override
@@ -44,9 +85,14 @@ public class URArrayList<E> implements URList<E> {
 		return false;
 	}
 
+	// Method to get the index of a value
 	@Override
 	public E get(int index) {
-		// TODO Auto-generated method stub
+		// if the index is less than or equal to the length return this point
+		if (index <= length) {
+			return (E) URArrayL[index];
+		}
+		// otherwise return null
 		return null;
 	}
 
@@ -64,8 +110,15 @@ public class URArrayList<E> implements URList<E> {
 
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		// Keep track of the index point in the ArrayList
+		URArrayL[index] = null;
+		// Use a for loop to
+		for (int i = index; i < originalSize; i++) {
+			URArrayL[i] = URArrayL[i + 1];
+		}
+		// Decrease the size of the array
+		originalSize--;
+		return (E) URArrayL;
 	}
 
 	@Override
@@ -76,20 +129,54 @@ public class URArrayList<E> implements URList<E> {
 
 	@Override
 	public boolean removeAll(Collection c) {
-		// TODO Auto-generated method stub
-		return false;
+		int i = 0;
+		if (i <= length - 1) {
+
+			for (i = fromIndex; toIndex < length; i++) {
+				arr[i++] = arr[toIndex++];
+			}
+			while (i < length)
+				arr[i++] = null;
+			length = length - (toIndex - fromIndex);
+			// length=;
+		}
 	}
 
 	@Override
 	public Object set(int index, Object element) {
-		// TODO Auto-generated method stub
-		return null;
+		// if index is less than zero return null
+		if (index < 0)
+			return null;
+		// if the index is greater than the arraylist length return null
+		if (index > length)
+			return null;
+		int i = length;
+		// if the length returns the originalSeze of the array, resize the Arraylist
+		if (length == originalSize) {
+			resize();
+		}
+		// while i does not equal the size of the index subtract an index point
+		while (i != index) {
+
+			URArrayL[i] = URArrayL[i - 1];
+			i--;
+		}
+		// otherwise increase the size and set the index point with the element in that
+		// location
+		URArrayL[i] = element;
+		length++;
+		return element;
 	}
 
+	// Return the original size of the length
+	public int originalSize() {
+		return length;
+	}
+
+	// Return the length of the array
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return length;
 	}
 
 	@Override
