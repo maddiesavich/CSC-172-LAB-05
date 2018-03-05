@@ -1,48 +1,88 @@
+//Madalyne Savich, msavich2, LAB 05, T/TR 4:50 PM-6:05 PM
+//I did not collaborate with anyone on this assignment.
+
 import java.util.Collection;
 import java.util.Iterator;
 
-public class URLinkedList <E> implements URList <E> {
 
+public class URLinkedList <E> implements URNode <E>{
+
+	private E e; // Value for this node
+	private URNode<E> n; // Reference to next node in list
+	private URNode<E> p; // Reference to previous node
+	private int numberOfNodes;
+	private int length = 0;
+	
 	// Inserts the specified element at the beginning of this list.
+	//Create a new head 
 	void addFirst(E e) {
-		
+		// if head is null
+		if(n == null) {
+		n = new Node(e);
+		n.next = head;
+		numberOfNodes++;
+		}
 	}
 	
 	// Appends the specified element to the end of this list.
 	void addLast(E e) {
+		p = tail;
+		while(p.next != null)
+		{
+			p = n.next;
+		}
 		
+		p.next = new Node(e);
+		numberOfNodes++;
 	}
 	
 	// Retrieves, but does not remove, the first element of this list, or returns null if this list is empty.
 	E peekFirst() {
-		return null;
+		return n;
 	}
 	
 	// Retrieves, but does not remove, the last element of this list, or returns null if this list is empty.
 	E peekLast() {
-		return null;
+		return n;
 	}
 	
 	// Retrieves and removes the first element of this list, or returns null if this list is empty.
 	E pollFirst() {
+		// n is null, return null because the list is empty
+		if(n == null) {
 		return null;
+		// else remove the node
+		} else {
+    		for(int i = 0; n <= i + 1; i++){
+    			n = n.next;
+    			numberOfNodes--;
+    			return true;
+    		}
 	}
+}
 	
 	// Retrieves and removes the last element of this list, or returns null if this list is empty.
 	E pollLast() {
-		return null;
+		return p;
 	}
 	
+	// Add an object using a for loop
 	@Override
 	public boolean add(Object e) {
-		// TODO Auto-generated method stub
-		return false;
+		for(int i = 0; n <= i + 1; i++){
+			n = n.next;
+			numberOfNodes++;
+			return true;
+		}
 	}
 
 	@Override
 	public void add(int index, Object element) {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0; n <= i + 1; i++){
+			n = n.next;
+			numberOfNodes++;
+			return true;
+		}
 	}
 
 	@Override
@@ -51,28 +91,33 @@ public class URLinkedList <E> implements URList <E> {
 		return false;
 	}
 
+	// Use a for loop to go through the entire list and remove each node
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0; n <= i + 1; i++){
+			n = n.next;
+			numberOfNodes--;
+			return true;
+		}
 	}
 
 	@Override
 	public boolean containsAll(Collection c) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
+	// return n, the node
 	@Override
 	public E get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return n;
 	}
 
+	// return the location of an object at certain index if it exist
 	@Override
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(n != null) {
+		return o;
+		}
 	}
 
 	@Override
@@ -81,16 +126,23 @@ public class URLinkedList <E> implements URList <E> {
 		return null;
 	}
 
+	// Use a for loop to remove bases on location at index i
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		if (index == i) {
+			n = n.next;
+			numberOfNodes--;
+			return true;
+		}
 	}
 
+	// i to remove the the node object o is present at
 	@Override
 	public boolean remove(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+		if(n !+ null){
+			n = n.next;
+			numberOfNodes--;
+			return true;
 	}
 
 	@Override
@@ -105,10 +157,10 @@ public class URLinkedList <E> implements URList <E> {
 		return null;
 	}
 
+	// Return the size of the LinkedList
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return length;
 	}
 
 	@Override
@@ -116,5 +168,6 @@ public class URLinkedList <E> implements URList <E> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
+
+
